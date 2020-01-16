@@ -1,0 +1,6 @@
+rootProject.name = 'mooorr'
+include 'common'
+include 'api'
+include 'admin'
+include 'apps'
+

@@ -1,0 +1,13 @@
+<svg class="lds-message" width="110px"  height="110px"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;"><g transform="translate(25 50)">
+<circle cx="0" cy="0" r="6" fill="#ff4e00" transform="scale(0.740078 0.740078)">
+  <animateTransform attributeName="transform" type="scale" begin="-0.2333333333333333s" calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1" dur="0.7s" repeatCount="indefinite"></animateTransform>
+</circle>
+</g><g transform="translate(50 50)">
+<circle cx="0" cy="0" r="6" fill="#ff4e00" transform="scale(0.277875 0.277875)">
+  <animateTransform attributeName="transform" type="scale" begin="-0.11666666666666665s" calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1" dur="0.7s" repeatCount="indefinite"></animateTransform>
+</circle>
+</g><g transform="translate(75 50)">
+<circle cx="0" cy="0" r="6" fill="#ff4e00" transform="scale(0.000174261 0.000174261)">
+  <animateTransform attributeName="transform" type="scale" begin="0s" calcMode="spline" keySplines="0.3 0 0.7 1;0.3 0 0.7 1" values="0;1;0" keyTimes="0;0.5;1" dur="0.7s" repeatCount="indefinite"></animateTransform>
+</circle>
+</g></svg>

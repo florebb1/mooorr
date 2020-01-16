@@ -1,0 +1,125 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+group 'com.laidback'
+version '0.0.1-SNAPSHOT'
+
+buildscript {
+
+    ext {
+        springBootVersion = '1.4.4.RELEASE'
+    }
+
+    repositories {
+        maven { url 'http://repo1.maven.org/maven2' }
+        jcenter { url "http://jcenter.bintray.com/" }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'org.springframework:springloaded:1.2.5.RELEASE'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+apply plugin: 'idea'
+
+idea{
+    module{
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
+
+idea{
+    module{
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
+
+springBoot {
+    mainClass = 'com.laidback.Application'
+}
+
+repositories {
+    maven { url 'http://repo1.maven.org/maven2' }
+    jcenter { url "http://jcenter.bintray.com/" }
+}
+
+configurations {
+    providedRuntime
+}
+
+jar {
+    baseName = 'mooorr-apps'
+}
+
+dependencies {
+    compile project(':common')
+    compile('org.springframework.boot:spring-boot-devtools')
+    compile('org.springframework.boot:spring-boot-starter-freemarker')
+    compile files('libs/log4sql.jar')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile("org.springframework.boot:spring-boot-starter-mail")
+
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-jdbc')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    compile('io.springfox:springfox-swagger2:2.9.2')
+    compile('io.springfox:springfox-swagger-ui:2.9.2')
+    compile("io.swagger:swagger-annotations:1.5.21")
+    compile("io.swagger:swagger-models:1.5.21")
+    compile("io.springfox:springfox-swagger2:2.9.2") {
+        exclude module: 'swagger-annotations'
+        exclude module: 'swagger-models'
+    }
+    compile('mysql:mysql-connector-java:5.1.47')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+}
+
+war {
+    baseName = 'mooorr-apps'
+}
+
+test {
+    jvmArgs '-Dspring.profiles.active=dev'
+    reports {
+        junitXml.enabled = true
+        html.enabled = false
+    }
+}
+
+
+task checkWin() {
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        task pathingJar(type: Jar) {
+            dependsOn configurations.runtime
+            appendix = 'pathing'
+
+            doFirst {
+                manifest {
+                    attributes "Class-Path": configurations.runtime.files.collect {it.toURL().toString().replaceFirst("file:/", '/')}.join(" ")
+                }
+            }
+        }
+
+        bootRun{
+            addResources = true
+            systemProperties System.properties
+            dependsOn pathingJar
+            doFirst {
+                classpath = files("$buildDir/classes/main", "$buildDir/resources/main", pathingJar.archivePath)
+            }
+        }
+    } else {
+        bootRun{
+            addResources = true
+            systemProperties System.properties
+        }
+    }
+}

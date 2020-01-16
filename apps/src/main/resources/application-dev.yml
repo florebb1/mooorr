@@ -1,0 +1,74 @@
+server:
+  port: 8082
+logging:
+  level:
+    ROOT: info
+    org:
+      hibernate:
+        type: trace
+spring:
+  profiles:
+    active: local
+    devtools:
+      livereload:
+        enabled: false
+    freemarker:
+      cache: false
+  datasource:
+    url: jdbc:mysql://117.52.98.39:3306/more?useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: more
+    password: laidback1107
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    properties.hibernate.hbm2ddl.auto: update
+    showSql: true
+    generate-ddl: true
+    database: mysql
+    properties.hibernate.format_sql: true
+  banner:
+    location: banner.txt
+  mvc:
+    favicon:
+      enabled: false
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: help@mooorr.com
+    password: 'helppleh2019'
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          start-tls-enable: true
+          auth: true
+          ssl:
+            enable: true
+        transport:
+          protocol: smtps
+    default-encoding: UTF-8
+api:
+  url: http://localhost:8080
+
+certification:
+  url: http://localhost:8082
+#  messages:
+#    basename: message/exception
+#    encoding: utf-8
+#    fallbackToSystemLocale: false
+
+
+# OAUTH
+#security:
+#  oauth2:
+#    #    bearer토큰  사용시
+#    #    client:
+#    #      client-Id: testClientId
+#    #      client-secret: testSecret
+#    #    resource:
+#    #      token-info-uri: http://localhost:8088/oauth/check_token
+#    jwt:
+#      signkey: laidback@#$
+#
+#laidback.accesstoken.url: http://localhost:8081/oauth/token
